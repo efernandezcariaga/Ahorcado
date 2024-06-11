@@ -75,8 +75,8 @@
             }
             else
             {
+                // Está pensado para que pierda un intento, pero podria perder todos.
                 //intentosRestantes = 0;
-                // Hacer que se reste un intento o que se pierda eljuego
                 intentosRestantes--;
                 return "Palabra incorrecta";
             }
@@ -128,6 +128,18 @@
             {
                 return "Letra invalida";
             }
+        }
+
+        public bool checkearEstadoActual()
+        {
+            if (estadoPalabraArray.Contains('_')) return false;
+            else return true;
+        }
+
+        public string mostrarEstado()
+        {
+            string estadoreturn = new string(estadoPalabraArray);
+            return estadoreturn;
         }
 
     }

@@ -38,8 +38,23 @@ namespace UnitTests
             Assert.AreEqual(game.setName(nombre), "Nombre invalido");
         }
 
+        //Test de validar palanbra elegida
+        [TestMethod]
+        public void ValidarPalabraElegidaIncorrecta()
+        {
+            Juego game = new Juego("Hola");
+            game.setName("Gino");
+            Assert.AreEqual(game.validarSecretWord(), "Valida");
+        }
 
-        // TEST DE ARRIESGAR PALABRA
+        public void ValidarPalabraElegidaCorrecta()
+        {
+            Juego game = new Juego("Hola!!**");
+            game.setName("Gino");
+            Assert.AreEqual(game.validarSecretWord(), "Palabra secreta invalida");
+        }
+
+        // Test de Arriesgar palabra
         [TestMethod]
         public void ArriesgarPalabraIncorrecta()
         {
@@ -130,6 +145,45 @@ namespace UnitTests
             Juego game = new Juego("Adios");
             game.setName("Gino");
             Assert.AreEqual(game.arriesgarLetra('3'), "Letra invalida");
+        }
+
+        // Test de resta de intentos
+        [TestMethod]
+        public void UnIntentoMenos()
+        {
+            Juego game = new Juego("Adios");
+            game.setName("Gino");
+            game.arriesgarLetra('e');
+            Assert.AreEqual(game.intentosRestantes, 4);
+        }
+
+        [TestMethod]
+        public void NoRestaIntento()
+        {
+            Juego game = new Juego("Adios");
+            game.setName("Gino");
+            game.validarLetra('d');
+            Assert.AreEqual(game.intentosRestantes, 5);
+        }
+
+        //Test de estados de letras
+        [TestMethod]
+        public void ValidarEstadoLetra()
+        {
+            Juego game = new Juego("Adios");
+            game.setName("Gino");
+            game.arriesgarLetra('d');
+            Assert.AreEqual(game.mostrarEstado(), "_d___");
+        }
+
+
+        [TestMethod]
+        public void EstadoLetraDistintoLugar()
+        {
+            Juego game = new Juego("Adios");
+            game.setName("Gino");
+            game.arriesgarLetra('d');
+            Assert.AreNotEqual(game.mostrarEstado(), "__d__");
         }
 
     }
