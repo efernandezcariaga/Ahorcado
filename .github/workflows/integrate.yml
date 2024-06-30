@@ -1,0 +1,23 @@
+name: dotnet package
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: [windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+      - name: setup NuGets
+        uses: NuGet/setup-nuget@v1.0.2
+      - name: restore nuget package
+        run: nuget restore Ahorcado.sln
+      - name: Build the Solution
+        run: msbuild Ahorcado.sln
