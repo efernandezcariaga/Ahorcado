@@ -17,14 +17,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
-      
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.2
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'  # Ajustar según la versión específica de .NET Core 8 que estás utilizando
       
       - name: Restore NuGet packages
-        run: nuget restore Ahorcado.sln
+        run: dotnet restore Ahorcado.sln
       
       - name: Build the Solution
-        run: msbuild Ahorcado.sln
+        run: dotnet build Ahorcado.sln --configuration Release  # Ajustar la configuración según tus necesidades
+
+      
