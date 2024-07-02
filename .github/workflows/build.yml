@@ -48,6 +48,8 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Run unit tests
         run: |
-          C:\Users\EzequielFC\Documents\Escritorio\Facultad\Agiles\Ahorcado\UnitTests\UnitTests.csproj
-          dotnet test --configuration Release --no-build --verbosity normal
+          cd C:\Users\EzequielFC\Documents\Escritorio\Facultad\Agiles\Ahorcado\UnitTests\UnitTests.csproj
+          dotnet restore
+          dotnet build
+          dotnet test
           
