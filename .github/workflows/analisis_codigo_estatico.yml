@@ -31,6 +31,7 @@ jobs:
       run: |
         dotnet build
         dotnet tool install --global dotnet-sonarscanner
+        export PATH="$PATH:$HOME/.dotnet/tools"
         dotnet sonarscanner begin /k:"<efernandezcariaga_Ahorcado>" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /o:"<efernandezcariaga>"
         dotnet build
         dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
