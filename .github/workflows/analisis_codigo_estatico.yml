@@ -1,4 +1,4 @@
-name: Analisis de codigo estatico con SonarCloud Scan
+name: Static Code Analysis with SonarCloud Scan
 
 on:
   push:
@@ -16,10 +16,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Setup JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '3.1'  
+        dotnet-version: '3.1'
 
     - name: Restore dependencies
       run: dotnet restore
