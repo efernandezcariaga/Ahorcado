@@ -1,4 +1,4 @@
-name: .NET Core CI
+name: Code Coverage
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'  # Asegúrate de que este campo esté configurado para .NET 8
+        dotnet-version: '8.0.x'  
 
     - name: Restore dependencies
       run: dotnet restore
