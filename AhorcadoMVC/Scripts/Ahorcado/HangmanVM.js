@@ -3,53 +3,81 @@
 /// <reference path="../knockout.mapping-latest.debug.js" />
 
 HangmanVM = function (data) {
+
     var self = this;
+
     ko.mapping.fromJS(data, {}, self);
     self.enableWordToGuess = ko.observable(true);
-    self.insertLetterClick = function () {
 
-    }
+
     self.insertWordToGuess = function () {
         $.post(
             {
                 url: "/Ahorcado/InsertWordToGuess",
                 data: ko.mapping.toJS(self),
                 success: function (response) {
+                    //debugger;
                     ko.mapping.fromJS(response, {}, self);
-                    if (self.Message() !== "Palabra secreta invalida") {
+
+                    // No los mapea
+                    self.ChancesLeft(response.chancesLeft);
+                    self.Message(response.message);
+                    self.WrongLetters(response.wrongLetters);
+
+
+                    if (self.Message () !== "Palabra secreta invalida") {
                         self.enableWordToGuess(false);
                     }
                     else {
-                        self.NotifyMessage(self.Message());
+                        self.NotifyMessage(response.message);
                     }
                     
                 },
                 error: function () {
+                    self.NotifyMessage("Ha ocurrido un error inesperado");
 
                 }
             });
     }
     self.tryLetter = function () {
+
         $.post(
             {
                 url: "/Ahorcado/TryLetter",
                 data: ko.mapping.toJS(self),
                 success: function (response) {
+                    debugger;
+
                     ko.mapping.fromJS(response, {}, self);
-                    self.drawHangman();
+                    // No los mapea
+                    self.ChancesLeft(response.chancesLeft);
+                    self.Message(response.message);
+                    self.WrongLetters(response.wrongLetters);
+                    self.GuessingWord(response.guessingWord);
+                    self.Win(response.win)
+
+
                     if (self.Message() !== "Acierto") {
+                        self.drawHangman();
                         self.NotifyMessage(self.Message());
                     }
+                    else if (self.Message() == "Acierto") {
+                        self.NotifyMessage(self.Message());
+                    }
+
+
                     if(self.Win())
                     {
                         self.Notify("win");
                     }
+
                     else if(self.ChancesLeft() == 0)
                     {
                         self.Notify("loss");
                     }
                 },
                 error: function () {
+                    self.NotifyMessage("Error inesperado");
 
                 }
             })
@@ -61,9 +89,18 @@ HangmanVM = function (data) {
                 url: "/Ahorcado/TryWord",
                 data: ko.mapping.toJS(self),
                 success: function (response) {
+
                     ko.mapping.fromJS(response, {}, self);
-                    self.drawHangman();
+
+                    // No los mapea
+                    self.ChancesLeft(response.chancesLeft);
+                    self.Message(response.message);
+                    self.WrongLetters(response.wrongLetters);
+                    self.GuessingWord(response.guessingWord);
+                    self.Win(response.win);
+
                     if (self.Message() !== "Palabra correcta") {
+                        self.drawHangman();
                         self.NotifyMessage(self.Message());
                     }
                     if (self.Win()) {
@@ -96,7 +133,7 @@ HangmanVM = function (data) {
                 break;
             case 'win':
                 opts.title = "Felicitaciones!!!";
-                opts.text = "Has ganado!! Enséñales a los perdedores para que aprendan!";
+                opts.text = "Has ganado!!";
                 opts.type = "success";
                 break;
         }
@@ -133,12 +170,12 @@ HangmanVM = function (data) {
         self.ChancesLeft(null);
         self.WrongLetters("");
         self.Win(false);
-        var canvas = $("#hangmanCanvas")[0];
+        var canvas = $("#AhorcadoCanvas")[0];
         canvas.width = canvas.width;
     }
 
     self.drawHangman = function () {
-        var canvas = $("#hangmanCanvas")[0];
+        var canvas = $("#AhorcadoCanvas")[0];
         var c = canvas.getContext('2d');
         // reset the canvas and set basic styles
         canvas.width = canvas.width;
