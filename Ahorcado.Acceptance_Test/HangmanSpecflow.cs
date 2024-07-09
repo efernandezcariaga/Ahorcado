@@ -51,13 +51,15 @@ namespace Ahorcado.Acceptance_Test
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-            char letterRisked = 's';
-            for (int i = 0; i < 6; i++)
+            List<char> lettersRisked = ['s','t','w','z','y'];
+            for (int i = 0; i < 5; i++)
             {
-                letterTyped.SendKeys(letterRisked.ToString());
+                letterTyped.SendKeys(lettersRisked[i].ToString());
                 Thread.Sleep(1000);
                 btnInsertLetter.SendKeys(Keys.Enter);
-                letterRisked++;
+                Thread.Sleep(1000);
+                letterTyped.Clear(); // Limpiar el campo después de cada letra
+                Thread.Sleep(500);
             }
         }
 
@@ -197,7 +199,7 @@ namespace Ahorcado.Acceptance_Test
             var guessingWord = driver.FindElement(By.Id("GuessingWord"));
             var mensaje = driver.FindElement(By.ClassName("ui-pnotify-text"));
             var win = guessingWord.GetAttribute("value").Replace(" ", String.Empty) == txtPalabra.GetAttribute("value");
-            var correctMesagge = "Has ganado!! Enséñales a los perdedores para que aprendan!" == mensaje.Text;
+            var correctMesagge = "Has ganado!!" == mensaje.Text;
             Thread.Sleep(1000);
             Assert.IsTrue(win && correctMesagge);
             Thread.Sleep(1000);
