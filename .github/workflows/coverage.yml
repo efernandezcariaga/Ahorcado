@@ -25,6 +25,8 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - name: Test unit tests with coverage
+      run: dotnet test Ahorcado/UnitTests/ --no-build --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
 
     - name: Report coverage
       run: |
