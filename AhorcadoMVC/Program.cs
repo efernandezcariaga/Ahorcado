@@ -19,15 +19,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(builder.Environment.ContentRootPath, "Scripts")),
+        Path.Combine(builder.Environment.WebRootPath, "Scripts")),
     RequestPath = "/Scripts"
 });
 
-
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider( 
-        Path.Combine(builder.Environment.ContentRootPath, "Content")),
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.WebRootPath, "Content")),
     RequestPath = "/Content"
 });
 
