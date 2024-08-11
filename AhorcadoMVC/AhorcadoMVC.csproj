@@ -63,6 +63,7 @@
     <Content Remove="wwwroot\css\pnotify.custom.css" />
     <Content Remove="wwwroot\css\Site.css" />
     <Content Remove="wwwroot\js\Ahorcado\HangmanVM.js" />
+    <Content Remove="wwwroot\js\bootstrap - Copy.min.js" />
     <Content Remove="wwwroot\js\bootstrap.js" />
     <Content Remove="wwwroot\js\bootstrap.min.js" />
     <Content Remove="wwwroot\js\jquery-3.1.1.intellisense.js" />
@@ -78,19 +79,10 @@
     <Content Remove="wwwroot\js\knockout.mapping-latest.js" />
     <Content Remove="wwwroot\js\modernizr-2.6.2.js" />
     <Content Remove="wwwroot\js\pnotify.custom.js" />
+    <Content Remove="wwwroot\js\site.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Content\bootstrap-theme.css" />
-    <None Include="wwwroot\Content\bootstrap-theme.css.map" />
-    <None Include="wwwroot\Content\bootstrap-theme.min.css" />
-    <None Include="wwwroot\Content\bootstrap-theme.min.css.map" />
-    <None Include="wwwroot\Content\bootstrap.css" />
-    <None Include="wwwroot\Content\bootstrap.css.map" />
-    <None Include="wwwroot\Content\bootstrap.min.css" />
-    <None Include="wwwroot\Content\bootstrap.min.css.map" />
-    <None Include="wwwroot\Content\pnotify.custom.css" />
-    <None Include="wwwroot\Content\Site.css" />
     <None Include="wwwroot\css\bootstrap-theme.css" />
     <None Include="wwwroot\css\bootstrap-theme.css.map" />
     <None Include="wwwroot\css\bootstrap-theme.min.css" />
@@ -102,6 +94,8 @@
     <None Include="wwwroot\css\pnotify.custom.css" />
     <None Include="wwwroot\css\Site.css" />
     <None Include="wwwroot\js\Ahorcado\HangmanVM.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
     <None Include="wwwroot\js\bootstrap.js" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\jquery-3.1.1.intellisense.js" />
@@ -117,22 +111,6 @@
     <None Include="wwwroot\js\knockout.mapping-latest.js" />
     <None Include="wwwroot\js\modernizr-2.6.2.js" />
     <None Include="wwwroot\js\pnotify.custom.js" />
-    <None Include="wwwroot\Scripts\Ahorcado\HangmanVM.js" />
-    <None Include="wwwroot\Scripts\bootstrap.js" />
-    <None Include="wwwroot\Scripts\bootstrap.min.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.intellisense.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.min.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.min.map" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.slim.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.slim.min.js" />
-    <None Include="wwwroot\Scripts\jquery-3.1.1.slim.min.map" />
-    <None Include="wwwroot\Scripts\knockout-3.4.0.debug.js" />
-    <None Include="wwwroot\Scripts\knockout-3.4.0.js" />
-    <None Include="wwwroot\Scripts\knockout.mapping-latest.debug.js" />
-    <None Include="wwwroot\Scripts\knockout.mapping-latest.js" />
-    <None Include="wwwroot\Scripts\modernizr-2.6.2.js" />
-    <None Include="wwwroot\Scripts\pnotify.custom.js" />
   </ItemGroup>
 
   <ItemGroup>
