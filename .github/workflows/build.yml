@@ -28,6 +28,14 @@ jobs:
           cd ./UnitTests/
           dotnet restore
           dotnet build
-          dotnet test 
+          dotnet test
+          
+      - name: Run acceptance tests
+        run: |
+          cd ./Ahorcado.Acceptance_Test/
+          dotnet restore
+          dotnet build
+          dotnet test
+
       
           
