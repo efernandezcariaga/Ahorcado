@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Content\bootstrap-theme.css" />
+    <Content Remove="wwwroot\Content\bootstrap-theme.css.map" />
+    <Content Remove="wwwroot\Content\bootstrap-theme.min.css" />
+    <Content Remove="wwwroot\Content\bootstrap-theme.min.css.map" />
+    <Content Remove="wwwroot\Content\bootstrap.css" />
+    <Content Remove="wwwroot\Content\bootstrap.css.map" />
+    <Content Remove="wwwroot\Content\bootstrap.min.css" />
+    <Content Remove="wwwroot\Content\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\Content\pnotify.custom.css" />
+    <Content Remove="wwwroot\Content\Site.css" />
     <Content Remove="wwwroot\Scripts\Ahorcado\HangmanVM.js" />
     <Content Remove="wwwroot\Scripts\bootstrap.js" />
     <Content Remove="wwwroot\Scripts\bootstrap.min.js" />
@@ -27,6 +37,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Content\bootstrap-theme.css" />
+    <None Include="wwwroot\Content\bootstrap-theme.css.map" />
+    <None Include="wwwroot\Content\bootstrap-theme.min.css" />
+    <None Include="wwwroot\Content\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\Content\bootstrap.css" />
+    <None Include="wwwroot\Content\bootstrap.css.map" />
+    <None Include="wwwroot\Content\bootstrap.min.css" />
+    <None Include="wwwroot\Content\bootstrap.min.css.map" />
+    <None Include="wwwroot\Content\pnotify.custom.css" />
+    <None Include="wwwroot\Content\Site.css" />
     <None Include="wwwroot\Scripts\Ahorcado\HangmanVM.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />
