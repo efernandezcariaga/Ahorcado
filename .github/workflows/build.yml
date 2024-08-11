@@ -23,6 +23,14 @@ jobs:
         run: |    
           dotnet build
 
+      - name: Start web application
+        run: |
+          dotnet run &
+
+      - name: Wait for the web application to be ready
+        run: |
+          sleep 10
+
       - name: Run unit tests
         run: |
           cd ./UnitTests/
