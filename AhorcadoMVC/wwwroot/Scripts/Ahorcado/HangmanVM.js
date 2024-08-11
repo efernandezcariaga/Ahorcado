@@ -46,7 +46,6 @@ HangmanVM = function (data) {
                 url: "/Ahorcado/TryLetter",
                 data: ko.mapping.toJS(self),
                 success: function (response) {
-                    debugger;
 
                     ko.mapping.fromJS(response, {}, self);
                     // No los mapea
