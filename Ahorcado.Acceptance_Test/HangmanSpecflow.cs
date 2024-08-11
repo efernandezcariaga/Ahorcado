@@ -9,14 +9,15 @@ namespace Ahorcado.Acceptance_Test
     public class HangmanSpecflow
     {
         IWebDriver driver;
-        String baseURL = "ahorcadoutnfrro.azurewebsites.net";
+        String baseURL = "https://ahorcadoutnfrro.azurewebsites.net/Ahorcado";
         int chancesLeftAnt;
 
         [BeforeScenario]
         public void TestInitialize()
         {
             ChromeOptions chromeOptions = new ChromeOptions();
-            var path = AppDomain.CurrentDomain.BaseDirectory + @"\Drivers\chromedriver.exe";
+            //var path = AppDomain.CurrentDomain.BaseDirectory + @"\Drivers\chromedriver.exe";
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"../../../Drivers\chromedriver.exe";
             //chromeOptions.BinaryLocation = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
             chromeOptions.AddArgument("--start-maximized"); // Opcional: maximiza la ventana del navegador
 
@@ -50,7 +51,7 @@ namespace Ahorcado.Acceptance_Test
         {
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
-            List<char> lettersRisked = ['s','t','w','z','y'];
+            List<char> lettersRisked = ['s', 't', 'w', 'z', 'y'];
             for (int i = 0; i < 5; i++)
             {
                 letterTyped.SendKeys(lettersRisked[i].ToString());
@@ -75,19 +76,7 @@ namespace Ahorcado.Acceptance_Test
         [AfterScenario]
         public void TestCleanUp()
         {
-            try
-            {
-                if (driver != null)
-                {
-                    driver.Quit();
-                    driver.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception if needed
-                Console.WriteLine("Exception during cleanup: " + ex.Message);
-            }
+            driver.Quit();
         }
 
 
