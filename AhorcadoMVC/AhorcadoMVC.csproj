@@ -8,32 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Content\bootstrap-theme.css" />
-    <Content Remove="wwwroot\Content\bootstrap-theme.css.map" />
-    <Content Remove="wwwroot\Content\bootstrap-theme.min.css" />
-    <Content Remove="wwwroot\Content\bootstrap-theme.min.css.map" />
-    <Content Remove="wwwroot\Content\bootstrap.css" />
-    <Content Remove="wwwroot\Content\bootstrap.css.map" />
-    <Content Remove="wwwroot\Content\bootstrap.min.css" />
-    <Content Remove="wwwroot\Content\bootstrap.min.css.map" />
-    <Content Remove="wwwroot\Content\pnotify.custom.css" />
-    <Content Remove="wwwroot\Content\Site.css" />
-    <Content Remove="wwwroot\Scripts\Ahorcado\HangmanVM.js" />
-    <Content Remove="wwwroot\Scripts\bootstrap.js" />
-    <Content Remove="wwwroot\Scripts\bootstrap.min.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.min.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.min.map" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.slim.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Remove="wwwroot\Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Remove="wwwroot\Scripts\knockout-3.4.0.debug.js" />
-    <Content Remove="wwwroot\Scripts\knockout-3.4.0.js" />
-    <Content Remove="wwwroot\Scripts\knockout.mapping-latest.debug.js" />
-    <Content Remove="wwwroot\Scripts\knockout.mapping-latest.js" />
-    <Content Remove="wwwroot\Scripts\modernizr-2.6.2.js" />
-    <Content Remove="wwwroot\Scripts\pnotify.custom.js" />
+    
   </ItemGroup>
 
   <ItemGroup>
