@@ -16,13 +16,15 @@ namespace Ahorcado.Acceptance_Test
         public void TestInitialize()
         {
 
+            //new DriverManager().SetUpDriver(new ChromeConfig());
+
             ChromeOptions chromeOptions = new ChromeOptions();
-            //var path = AppDomain.CurrentDomain.BaseDirectory + @"\Drivers";
-            chromeOptions.BinaryLocation = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"\Drivers";
+            //chromeOptions.BinaryLocation = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
             chromeOptions.AddArgument("--start-maximized"); // Opcional: maximiza la ventana del navegador
 
-            //driver = new ChromeDriver(path, chromeOptions);
-            driver = new ChromeDriver(chromeOptions);
+            driver = new ChromeDriver(path, chromeOptions);
+            //driver = new ChromeDriver(chromeOptions
 
 
         }
@@ -76,7 +78,7 @@ namespace Ahorcado.Acceptance_Test
         [AfterScenario]
         public void TestCleanUp()
         {
-            //driver.Quit();
+            driver.Quit();
         }
 
 
