@@ -67,10 +67,17 @@ namespace Ahorcado.Acceptance_Test
         public void ThenIShouldBeToldThatILost()
         {
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
-            var loss = Convert.ToInt32(chancesLeft.GetAttribute("value")) == 0;
+            int chances;
+            if (!Int32.TryParse(chancesLeft.Text, out chances))
+            {
+                throw new InvalidOperationException("El texto no es un número válido.");
+            }
+            var loss = chances == 0;
+
             Thread.Sleep(1000);
             Assert.IsTrue(loss);
             Thread.Sleep(1000);
+
         }
 
         [AfterScenario]
@@ -103,7 +110,11 @@ namespace Ahorcado.Acceptance_Test
         public void WhenIEnterAAsTheTypedLetterOneTime()
         {
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
-            chancesLeftAnt = Convert.ToInt32(chancesLeft.GetAttribute("value"));
+            int chancesLeftAnt;
+            if (!Int32.TryParse(chancesLeft.Text, out chancesLeftAnt))
+            {
+                throw new InvalidOperationException("El texto no es un número válido.");
+            }
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
             letterTyped.SendKeys("A");
@@ -115,6 +126,12 @@ namespace Ahorcado.Acceptance_Test
         public void ThenIShouldBeToldThatIHitTheLetter()
         {
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
+
+            int chancesLeftValue;
+            if (!Int32.TryParse(chancesLeft.Text, out chancesLeftValue))
+            {
+                throw new InvalidOperationException("El texto no es un número válido.");
+            }
             var hit = Convert.ToInt32(chancesLeft.GetAttribute("value")) == chancesLeftAnt;
             Thread.Sleep(1000);
             Assert.IsTrue(hit);
