@@ -78,7 +78,19 @@ namespace Ahorcado.Acceptance_Test
         [AfterScenario]
         public void TestCleanUp()
         {
-            driver.Quit();
+            try
+            {
+                if (driver != null)
+                {
+                    driver.Quit();
+                    driver.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                Console.WriteLine("Exception during cleanup: " + ex.Message);
+            }
         }
 
 
