@@ -1,6 +1,6 @@
-﻿/// <reference path="../knockout-3.4.0.debug.js" />
-/// <reference path="../jquery-3.1.1.js" />
-/// <reference path="../knockout.mapping-latest.debug.js" />
+﻿<reference path="../knockout-3.4.0.debug.js" />
+<reference path="../jquery-3.1.1.js" />
+<reference path="../knockout.mapping-latest.debug.js" />
 
 HangmanVM = function (data) {
 
@@ -16,10 +16,8 @@ HangmanVM = function (data) {
                 url: "/Ahorcado/InsertWordToGuess",
                 data: ko.mapping.toJS(self),
                 success: function (response) {
-                    //debugger;
                     ko.mapping.fromJS(response, {}, self);
 
-                    // No los mapea
                     self.ChancesLeft(response.chancesLeft);
                     self.Message(response.message);
                     self.WrongLetters(response.wrongLetters);
@@ -48,7 +46,7 @@ HangmanVM = function (data) {
                 success: function (response) {
 
                     ko.mapping.fromJS(response, {}, self);
-                    // No los mapea
+
                     self.ChancesLeft(response.chancesLeft);
                     self.Message(response.message);
                     self.WrongLetters(response.wrongLetters);
@@ -91,7 +89,6 @@ HangmanVM = function (data) {
 
                     ko.mapping.fromJS(response, {}, self);
 
-                    // No los mapea
                     self.ChancesLeft(response.chancesLeft);
                     self.Message(response.message);
                     self.WrongLetters(response.wrongLetters);

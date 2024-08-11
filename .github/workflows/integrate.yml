@@ -1,31 +1,31 @@
-# name: dotnet package
+name: dotnet package
 
-# on:
-#   push:
-#     branches: 
-#       - master
-#   pull_request:
-#     branches:
-#       - master
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches:
+      - master
 
-# jobs:
-#   build:
+jobs:
+  build:
 
-#     runs-on: windows-latest
+    runs-on: windows-latest
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       
-#       - name: Setup .NET Core SDK
-#         uses: actions/setup-dotnet@v1
-#         with:
-#           dotnet-version: '8.0.x'  Ajustar según la versión específica de .NET Core 8 que estás utilizando
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'  #Ajustar según la versión específica de .NET Core 8 que estás utilizando
       
-#       - name: Restore NuGet packages
-#         run: dotnet restore Ahorcado.sln
+      - name: Restore NuGet packages
+        run: dotnet restore Ahorcado.sln
       
-#       - name: Build the Solution
-#         run: dotnet build Ahorcado.sln --configuration Release  Ajustar la configuración según tus necesidades
+      - name: Build the Solution
+        run: dotnet build Ahorcado.sln --configuration Release  #Ajustar la configuración según tus necesidades
 
       
