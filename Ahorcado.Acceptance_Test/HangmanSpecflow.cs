@@ -9,7 +9,7 @@ namespace Ahorcado.Acceptance_Test
     public class HangmanSpecflow
     {
         IWebDriver driver;
-        String baseURL = "https://localhost:7149/Ahorcado";
+        String baseURL = "ahorcadoutnfrro.azurewebsites.net";
         int chancesLeftAnt;
 
         [BeforeScenario]
