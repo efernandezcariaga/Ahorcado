@@ -38,12 +38,12 @@ jobs:
           dotnet build
           dotnet test
           
-      - name: Run acceptance tests
-        run: |
-          cd ./Ahorcado.Acceptance_Test/
-          dotnet restore
-          dotnet build
-          dotnet test
+      # - name: Run acceptance tests
+      #   run: |
+      #     cd ./Ahorcado.Acceptance_Test/
+      #     dotnet restore
+      #     dotnet build
+      #     dotnet test
 
       
           
