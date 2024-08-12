@@ -1,0 +1,86 @@
+name: Build, Test, and Deploy ASP.NET Core App to Azure Web App - ahorcadoutnfrro
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'  # Actualiza a la versión específica que estás utilizando
+
+      - name: Restore NuGet packages
+        run: dotnet restore Ahorcado.sln
+
+      - name: Build the Solution
+        run: dotnet build Ahorcado.sln --configuration Release
+
+      - name: Run unit tests and collect coverage
+        run: |
+          cd ./UnitTests/
+          dotnet test --no-build --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
+
+      - name: Report coverage
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: coveragereport
+
+      - name: Run acceptance tests
+        run: |
+          cd ./Ahorcado.Acceptance_Test/
+          dotnet restore
+          dotnet build
+          dotnet test
+
+  deploy:
+    runs-on: windows-latest
+    needs: build_and_test  # Se ejecuta solo si el trabajo de construcción y pruebas pasa
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'  # Actualiza a la versión específica que estás utilizando
+
+      - name: Publish the application
+        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'ahorcadoutnfrro'
+          slot-name: 'Production'
+          package: ${{env.DOTNET_ROOT}}/myapp
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F50C00A3CD114E258668AF71A159E57B }}
