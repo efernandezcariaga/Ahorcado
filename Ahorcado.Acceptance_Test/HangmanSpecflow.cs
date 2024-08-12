@@ -231,7 +231,7 @@ namespace Ahorcado.Acceptance_Test
             Thread.Sleep(1000);
         }
 
-        [Then(@"It should tell me that the word is invalid")]
+        [Then(@"It should tell me that the word is invalid")] 
         public void ThenIShouldBeToldThatTheWordIsInvalid()
         {
             Thread.Sleep(1000);
