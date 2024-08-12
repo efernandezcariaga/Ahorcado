@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy ASP.Net Core app to Azure Web App - ahorcadoutnfrro
 
 on:
@@ -18,7 +21,8 @@ jobs:
         with:
           dotnet-version: '3.1'
 
-      - name: Restore dependencies
+      # Agregué el paso de restaurar dependencias para asegurar que todo esté listo antes de compilar y publicar.
+      - name: Restore dependencies 
         run: dotnet restore AhorcadoMVC/AhorcadoMVC.csproj
 
       - name: Build with dotnet
@@ -26,12 +30,11 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: "C:\Program Files\dotnet\myapp"
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
@@ -52,5 +55,7 @@ jobs:
         with:
           app-name: 'ahorcadoutnfrro'
           slot-name: 'Production'
-          package: "C:\Program Files\dotnet\myapp"  # Asegúrate de que esta ruta apunte al paquete correcto
+          package:  ${{env.DOTNET_ROOT}}/myapp
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F50C00A3CD114E258668AF71A159E57B }}
+
+ 
