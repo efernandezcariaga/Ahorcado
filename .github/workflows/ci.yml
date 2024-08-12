@@ -37,6 +37,20 @@ jobs:
         run: |
           sleep 10
 
+      - name: tests 
+        run: |
+          cd ./UnitTests/
+          dotnet restore
+          dotnet build
+          dotnet test
+          
+      - name: Run acceptance tests
+        run: |
+          cd ./Ahorcado.Acceptance_Test/
+          dotnet restore
+          dotnet build
+          dotnet test
+
       - name: Run unit tests with coverage
         run: |
           cd ./UnitTests/
