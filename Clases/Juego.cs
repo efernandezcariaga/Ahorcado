@@ -2,14 +2,12 @@
 {
     public class Juego
     {
-     
         public string nombreJugador;
         private string palabraSecreta;
         private string estadoPalabra;
         public char[] estadoPalabraArray;
         public int intentosRestantes;
         public List<char> letrasErradas = new List<char>();
-
 
         // Construtor con Palabra y Nombre Hardcodeados
         public Juego()
@@ -19,7 +17,6 @@
             this.estadoPalabra = "_________";
             this.estadoPalabraArray = estadoPalabra.ToCharArray();
             this.intentosRestantes = 5;
-
         }
 
         // Construtor con Palabra elegida
@@ -60,7 +57,6 @@
             }
         }
 
-
         public string arriesgarPalabra(string palabra)
         {
             if (string.IsNullOrWhiteSpace(palabra) || !palabra.All(char.IsLetterOrDigit))
@@ -82,7 +78,6 @@
             }
         }
 
-
         public bool validarLetra(char letra)
         {
             if (char.IsLetter(letra))
@@ -94,7 +89,6 @@
                 return false;
             }
         }
-
 
         public string arriesgarLetra(char letra)
         {

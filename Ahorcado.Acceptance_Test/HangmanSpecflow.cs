@@ -82,7 +82,6 @@ namespace Ahorcado.Acceptance_Test
             driver.Quit();
         }
 
-
         //Segundo test - acertar una letra
         [Given(@"I have entered Hola as the wordToGuess")]
         public void GivenIHaveEnteredHolaAsTheWordToGuess()
@@ -123,7 +122,6 @@ namespace Ahorcado.Acceptance_Test
             Assert.IsTrue(hit);
             Thread.Sleep(1000);
         }
-
 
         //Tercer test - Insertar un numero
         [Given(@"I have entered Computadora as the wordToGuess")]
@@ -168,8 +166,6 @@ namespace Ahorcado.Acceptance_Test
             Assert.IsTrue(invalid);
             Thread.Sleep(1000);
         }
-
-
 
         //Cuarto test - Arriesgar palabra correcta
         [Given(@"I have entered Teclado as the wordToGuess")]
@@ -300,8 +296,5 @@ namespace Ahorcado.Acceptance_Test
             var lostChance = Convert.ToInt32(chancesLeft.GetAttribute("value")) == chancesLeftAnt - 1;
             Assert.IsTrue(lostChance);
         }
-
-
-
     }
 }
