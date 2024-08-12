@@ -29,6 +29,14 @@ jobs:
       - name: Build the Solution
         run: dotnet build Ahorcado.sln --configuration Release --no-restore
 
+      - name: Start web application
+        run: |
+          dotnet run &
+
+      - name: Wait for the web application to be ready
+        run: |
+          sleep 10
+
       - name: Run unit tests with coverage
         run: |
           cd ./UnitTests/
