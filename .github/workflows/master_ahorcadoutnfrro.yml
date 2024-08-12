@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy ASP.Net Core app to Azure Web App - ahorcadoutnfrro
+name: Build, Test, and Deploy ASP.Net Core app to Azure Web App - ahorcadoutnfrro
 
 on:
   push:
@@ -10,39 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Build and analyze
-    runs-on: windows-latest
-    steps:
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu' #Alternative distribution options are available. 
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  #Shallow clones should be disabled for a better relevancy of analysis
-
-      - name: build solution
-        run: |    
-          dotnet build
-
-      - name: Start web application
-        run: |
-          dotnet run &
-
-      - name: Wait for the web application to be ready
-        run: |
-          sleep 10
-          
-      - name: Run acceptance tests
-        run: |
-          cd ./Ahorcado.Acceptance_Test/
-          dotnet restore
-          dotnet build
-          dotnet test
-
-  build:
+  build_and_test:
     runs-on: windows-latest
 
     steps:
@@ -56,22 +21,31 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-      - name: dotnet publish
-        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
+      - name: Run tests (unit and acceptance)
+        run: |
+          dotnet test Ahorcado.Tests/Ahorcado.Tests.csproj
+          dotnet test Ahorcado.Acceptance_Test/Ahorcado.Acceptance_Test.csproj
+          
+  deploy:
+    runs-on: windows-latest
+    needs: build_and_test  # Se ejecuta solo si los tests pasan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '3.1'
+
+      - name: Publish with dotnet
+        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
+      
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
@@ -85,7 +59,3 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F50C00A3CD114E258668AF71A159E57B }}
-
-
-
- 
