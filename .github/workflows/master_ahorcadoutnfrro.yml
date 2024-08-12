@@ -55,7 +55,7 @@ jobs:
         with:
           app-name: 'ahorcadoutnfrro'
           slot-name: 'Production'
-          package:  "C:\Program Files\dotnet\myapp" 
+          package:  "C:\Program Files/dotnet/myapp" 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F50C00A3CD114E258668AF71A159E57B }}
 
  
