@@ -1,6 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Gherkin.CucumberMessages.Types;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
 using TechTalk.SpecFlow;
 
 namespace Ahorcado.Acceptance_Test
@@ -66,18 +68,12 @@ namespace Ahorcado.Acceptance_Test
         [Then(@"I should be told that I lost")]
         public void ThenIShouldBeToldThatILost()
         {
+            Thread.Sleep(1000);
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
-            int chances;
-            if (!Int32.TryParse(chancesLeft.Text, out chances))
-            {
-                throw new InvalidOperationException("El texto no es un número válido.");
-            }
-            var loss = chances == 0;
-
+            var loss = Convert.ToInt32(chancesLeft.GetAttribute("value")) == 0;
             Thread.Sleep(1000);
             Assert.IsTrue(loss);
             Thread.Sleep(1000);
-
         }
 
         [AfterScenario]
@@ -110,11 +106,7 @@ namespace Ahorcado.Acceptance_Test
         public void WhenIEnterAAsTheTypedLetterOneTime()
         {
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
-            int chancesLeftAnt;
-            if (!Int32.TryParse(chancesLeft.Text, out chancesLeftAnt))
-            {
-                throw new InvalidOperationException("El texto no es un número válido.");
-            }
+            chancesLeftAnt = Convert.ToInt32(chancesLeft.GetAttribute("value"));
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
             letterTyped.SendKeys("A");
@@ -126,12 +118,6 @@ namespace Ahorcado.Acceptance_Test
         public void ThenIShouldBeToldThatIHitTheLetter()
         {
             var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
-
-            int chancesLeftValue;
-            if (!Int32.TryParse(chancesLeft.Text, out chancesLeftValue))
-            {
-                throw new InvalidOperationException("El texto no es un número válido.");
-            }
             var hit = Convert.ToInt32(chancesLeft.GetAttribute("value")) == chancesLeftAnt;
             Thread.Sleep(1000);
             Assert.IsTrue(hit);
@@ -171,7 +157,12 @@ namespace Ahorcado.Acceptance_Test
         [Then(@"It should tell me that the letter is invalid")]
         public void ThenIShouldBeToldThatTheLetterIsInvalid()
         {
+            Console.Write("Hola");
+            Thread.Sleep(1000);
+
             var mensaje = driver.FindElement(By.ClassName("ui-pnotify-text"));
+
+            Console.Write(mensaje);
             var invalid = "Letra invalida" == mensaje.Text;
             Thread.Sleep(1000);
             Assert.IsTrue(invalid);
@@ -214,6 +205,8 @@ namespace Ahorcado.Acceptance_Test
         {
             var txtPalabra = driver.FindElement(By.Id("WordToGuess"));
             var guessingWord = driver.FindElement(By.Id("GuessingWord"));
+            Thread.Sleep(1000);
+
             var mensaje = driver.FindElement(By.ClassName("ui-pnotify-text"));
             var win = guessingWord.GetAttribute("value").Replace(" ", String.Empty) == txtPalabra.GetAttribute("value");
             var correctMesagge = "Has ganado!!" == mensaje.Text;
@@ -245,12 +238,69 @@ namespace Ahorcado.Acceptance_Test
         [Then(@"It should tell me that the word is invalid")]
         public void ThenIShouldBeToldThatTheWordIsInvalid()
         {
+            Thread.Sleep(1000);
+
             var mensaje = driver.FindElement(By.ClassName("ui-pnotify-text"));
             var invalid = "Palabra secreta invalida" == mensaje.Text;
             Thread.Sleep(1000);
             Assert.IsTrue(invalid);
             Thread.Sleep(1000);
         }
+
+        //Escenario - Arriesgar una palabra incorrecta
+        [Given(@"I have entered Monitor as the wordToGuess")]
+        public void GivenIHaveEnteredMonitorAsTheWordToGuess()
+        {
+            driver.Navigate().GoToUrl(baseURL);
+
+            Thread.Sleep(5000);
+
+            var txtPalabra = driver.FindElement(By.Id("WordToGuess"));
+            txtPalabra.SendKeys("Monitor");
+
+            Thread.Sleep(1000);
+
+            var btnInsertWord = driver.FindElement(By.Id("btnInsertWord"));
+            btnInsertWord.SendKeys(Keys.Enter);
+
+            Thread.Sleep(1000);
+        }
+
+        [When(@"I enter Tecladi as the typedLetter")]
+        public void WhenIEnterTecladiAsTheTypedLetter()
+        {
+            var letterTyped = driver.FindElement(By.Id("LetterTyped"));
+            var btnRiskWord = driver.FindElement(By.Id("btnRiskWord"));
+            chancesLeftAnt = Convert.ToInt32(driver.FindElement(By.Id("ChancesLeft")).GetAttribute("value"));
+            letterTyped.SendKeys("Tecladi");
+            Thread.Sleep(1000);
+            btnRiskWord.SendKeys(Keys.Enter);
+            Thread.Sleep(1000);
+        }
+
+        [Then(@"It should tell me that I lost a chance")]
+        public void ThenItShouldTellMeThatILostAChance()
+        {
+            var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
+            var lostChance = Convert.ToInt32(chancesLeft.GetAttribute("value")) == chancesLeftAnt - 1;
+            Assert.IsTrue(lostChance);
+        }
+
+        [Then(@"The guessing word should remain incomplete")]
+        public void ThenTheGuessingWordShouldRemainIncomplete()
+        {
+            var guessingWord = driver.FindElement(By.Id("GuessingWord")).GetAttribute("value").Replace(" ", String.Empty);
+            Assert.IsTrue(guessingWord != "Monitor");
+        }
+
+        [Then(@"The chances left should be reduced by one")]
+        public void ThenTheChancesLeftShouldBeReducedByOne()
+        {
+            var chancesLeft = driver.FindElement(By.Id("ChancesLeft"));
+            var lostChance = Convert.ToInt32(chancesLeft.GetAttribute("value")) == chancesLeftAnt - 1;
+            Assert.IsTrue(lostChance);
+        }
+
 
 
     }

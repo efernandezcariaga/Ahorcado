@@ -27,3 +27,10 @@ Scenario: Hit a Secret Word
 Scenario: Insert a non-alphabetic Secret Word
 	Given I have entered 123 as the wordToGuess
 	Then It should tell me that the word is invalid
+
+Scenario: Risk an incorrect word
+    Given I have entered Monitor as the wordToGuess
+    When I enter Tecladi as the typedLetter
+    Then It should tell me that I lost a chance
+    And The guessing word should remain incomplete
+    And The chances left should be reduced by one
