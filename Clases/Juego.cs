@@ -2,12 +2,12 @@
 {
     public class Juego
     {
-        public string nombreJugador;
+        public string? nombreJugador;
         private string palabraSecreta;
         private string estadoPalabra;
         public char[] estadoPalabraArray;
         public int intentosRestantes;
-        public List<char> letrasErradas = new List<char>();
+        public List<char> letrasErradas = [];
 
         // Construtor con Palabra y Nombre Hardcodeados
         public Juego()
@@ -63,7 +63,7 @@
             {
                 return "Palabra invalida";
             }
-            else if (palabra.ToLower() == this.palabraSecreta)
+            else if (palabra.Equals(this.palabraSecreta, StringComparison.CurrentCultureIgnoreCase))
             {
                 estadoPalabra = palabraSecreta;
                 estadoPalabraArray = palabraSecreta.ToCharArray();
@@ -132,7 +132,7 @@
 
         public string mostrarEstado()
         {
-            string estadoreturn = new string(estadoPalabraArray);
+            string estadoreturn = new(estadoPalabraArray);
             return estadoreturn;
         }
 

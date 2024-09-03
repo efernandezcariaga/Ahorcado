@@ -17,12 +17,13 @@ namespace AhorcadoMVC.Models
         public Int32? ChancesLeft { get; set; } = null!;
         
         [DisplayName("Letras Erradas")]
-        public String WrongLetters { get; set; } = null!;
+        public String? WrongLetters { get; set; } = null!;
         
         [DisplayName("Mensaje")]
-        public String Message { get; set; } = null!;
+        public String? Message { get; set; } = null!;
 
-        public Boolean Win { get; set; }
+        [DisplayName("Ganaste")]
+        public bool? Win { get; set; }
 
     }
 }

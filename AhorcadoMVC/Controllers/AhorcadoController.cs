@@ -57,11 +57,11 @@ namespace AhorcadoMVC.Controllers
                 }
                 model.LetterTyped = string.Empty;
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 model.Message = "Ingrese un caracter válido";
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 model.Message = "Ingrese una letra o palabra";
             }

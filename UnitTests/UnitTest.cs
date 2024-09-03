@@ -42,7 +42,7 @@ namespace UnitTests
         [TestMethod]
         public void ValidarPalabraElegidaIncorrecta()
         {
-            Juego game = new Juego("Hola");
+            Juego game = new("Hola");
             game.setName("Gino");
             Assert.AreEqual(game.validarSecretWord(), "Valida");
         }
@@ -50,7 +50,7 @@ namespace UnitTests
         [TestMethod]
         public void ValidarPalabraElegidaCorrecta()
         {
-            Juego game = new Juego("Hola!!**");
+            Juego game = new("Hola!!**");
             game.setName("Gino");
             Assert.AreEqual(game.validarSecretWord(), "Palabra secreta invalida");
         }
@@ -59,21 +59,21 @@ namespace UnitTests
         [TestMethod]
         public void ArriesgarPalabraIncorrecta()
         {
-            Juego game = new Juego("Hola");
+            Juego game = new("Hola");
             Assert.AreEqual(game.arriesgarPalabra("derrota"), "Palabra incorrecta");
         }
 
         [TestMethod]
         public void ArriesgarPalabraVacia()
         {
-            Juego game = new Juego("Hola");
+            Juego game = new("Hola");
             Assert.AreEqual(game.arriesgarPalabra(""), "Palabra invalida");
         }
 
         [TestMethod]
         public void ArriesgarPalabraCorrecta()
         {
-            Juego game = new Juego("Hardcoded");
+            Juego game = new("Hardcoded");
             Assert.AreEqual(game.arriesgarPalabra("Hardcoded"), "Palabra correcta");
         }
 
@@ -81,21 +81,21 @@ namespace UnitTests
         [TestMethod]
         public void ValidarEspacioBlanco()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.validarLetra(' '), false);
         }
 
         [TestMethod]
         public void ValidarNumero()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.validarLetra('3'), false);
         }
 
         [TestMethod]
         public void ValidarLetraValida()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.validarLetra('d'), true);
         }
 
@@ -103,14 +103,14 @@ namespace UnitTests
         [TestMethod]
         public void ArriesgarLetraIncorrecta()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.arriesgarLetra('z'), "Letra incorrecta");
         }
 
         [TestMethod]
         public void ArriesgarLetraCorrecta()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.arriesgarLetra('d'), "Acierto");
         }
 
@@ -118,7 +118,7 @@ namespace UnitTests
         [TestMethod]
         public void ArriesgarLetraCorrectaNoCaseSensitive()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.arriesgarLetra('D'), "Acierto");
         }
 
@@ -127,14 +127,14 @@ namespace UnitTests
         [TestMethod]
         public void ArriesgarLetraEspacioBlanco()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.arriesgarLetra(' '), "Letra invalida");
         }
 
         [TestMethod]
         public void ArriesgarLetraNumero()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             Assert.AreEqual(game.arriesgarLetra('3'), "Letra invalida");
         }
 
@@ -142,7 +142,7 @@ namespace UnitTests
         [TestMethod]
         public void UnIntentoMenos()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             game.arriesgarLetra('e');
             Assert.AreEqual(game.intentosRestantes, 4);
         }
@@ -150,7 +150,7 @@ namespace UnitTests
         [TestMethod]
         public void NoRestaIntento()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             game.validarLetra('d');
             Assert.AreEqual(game.intentosRestantes, 5);
         }
@@ -159,7 +159,7 @@ namespace UnitTests
         [TestMethod]
         public void ValidarEstadoLetra()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             game.arriesgarLetra('d');
             Assert.AreEqual(game.mostrarEstado(), "_d___");
         }
@@ -167,7 +167,7 @@ namespace UnitTests
         [TestMethod]
         public void EstadoLetraDistintoLugar()
         {
-            Juego game = new Juego("Adios");
+            Juego game = new("Adios");
             game.arriesgarLetra('l');
             Assert.AreNotEqual(game.mostrarEstado(), "_d___");
         }
@@ -176,14 +176,14 @@ namespace UnitTests
         [TestMethod]
         public void EstadoDeJuegoNoGanado()
         {
-            Juego game = new Juego("Hola");
+            Juego game = new("Hola");
             Assert.AreEqual(game.checkearEstadoActual(), false);
         }
 
         [TestMethod]
         public void EstadoDeJuegoGanado()
         {
-            Juego game = new Juego("Hola");
+            Juego game = new("Hola");
             game.arriesgarPalabra("Hola");
             Assert.AreEqual(game.checkearEstadoActual(), true);
         }
