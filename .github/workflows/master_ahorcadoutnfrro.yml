@@ -30,8 +30,8 @@ jobs:
         
 
       - name: dotnet publish
-        # run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
-        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o ./publish
+        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
+        # run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o ./publish
 
 
       

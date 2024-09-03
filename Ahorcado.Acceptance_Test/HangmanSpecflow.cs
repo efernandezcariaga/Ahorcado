@@ -51,6 +51,8 @@ namespace Ahorcado.Acceptance_Test
         [When(@"I enter X as the typedLetter five times")]
         public void WhenIEnterXAsTheTypedLetterFiveTimes()
         {
+            Thread.Sleep(500);
+
             var letterTyped = driver.FindElement(By.Id("LetterTyped"));
             var btnInsertLetter = driver.FindElement(By.Id("btnInsertLetter"));
             List<char> lettersRisked = ['s', 't', 'w', 'z', 'y'];
