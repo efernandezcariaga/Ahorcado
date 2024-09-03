@@ -188,5 +188,73 @@ namespace UnitTests
             Assert.AreEqual(game.checkearEstadoActual(), true);
         }
 
+        [TestMethod]
+        public void IngresarNombreLimiteMaximo()
+        {
+            Juego game = new();
+            string nombre = "GinoGallinaEzequiel";
+            Assert.AreEqual(game.setName(nombre), "Nombre valido");
+        }
+
+        [TestMethod]
+        public void IngresarNombreConNumeros()
+        {
+            Juego game = new();
+            string nombre = "Gino123";
+            Assert.AreEqual(game.setName(nombre), "Nombre valido");
+        }
+
+        [TestMethod]
+        public void ValidarPalabraSecretaEnBlanco()
+        {
+            Juego game = new Juego("");
+            Assert.AreEqual(game.validarSecretWord(), "Palabra secreta invalida");
+        }
+
+
+        [TestMethod]
+        public void ValidarPalabraSecretaConEspeciales()
+        {
+            Juego game = new Juego("Hola@123");
+            Assert.AreEqual(game.validarSecretWord(), "Palabra secreta invalida");
+        }
+
+
+        [TestMethod]
+        public void IntentosRestantesDespuesDeAcierto()
+        {
+            Juego game = new Juego("Gato");
+            game.arriesgarLetra('g');
+            Assert.AreEqual(game.intentosRestantes, 5);
+        }
+
+
+        [TestMethod]
+        public void EstadoJuegoPalabraIncorrectaDespuesDeAcierto()
+        {
+            Juego game = new Juego("Perro");
+            game.arriesgarLetra('p');
+            Assert.AreEqual(game.arriesgarPalabra("gato"), "Palabra incorrecta");
+        }
+
+
+        [TestMethod]
+        public void EstadoJuegoParcialmenteAdivinado()
+        {
+            Juego game = new Juego("perro");
+            game.arriesgarLetra('p');
+            game.arriesgarLetra('e');
+            Assert.AreEqual(game.mostrarEstado(), "pe___");
+        }
+
+        [TestMethod]
+        public void MostrarEstadoInicial()
+        {
+            Juego game = new Juego("perro");
+            Assert.AreEqual(game.mostrarEstado(), "_____");
+        }
+
+
+
     }
 }
