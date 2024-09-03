@@ -28,9 +28,13 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
         
-      - name: dotnet publish
-        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp" /v:detailed
 
+      - name: dotnet publish
+        # run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o "C:\Program Files\dotnet\myapp"
+        run: dotnet publish AhorcadoMVC/AhorcadoMVC.csproj -c Release -o ./publish
+
+
+      
       - name: Verify wwwroot inclusion
         run: |
           if (-not (Test-Path "C:\Program Files\dotnet\myapp\wwwroot")) {
